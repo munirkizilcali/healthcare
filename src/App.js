@@ -1,25 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+
+import ContentTypeDropdown from "./ContentTypeDropdown";
+import ContentList from "./ContentList";
+import ContentDetails from "./ContentDetails";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedContentType: "",
+      selectedContentUrl: ""
+    };
+    this.handleDropdown = this.handleDropdown.bind(this);
+    this.handleListSelection = this.handleListSelection.bind(this);
+  }
+
+  handleDropdown(e, component) {
+    this.setState({ selectedContentType: component.value });
+  }
+
+  handleListSelection(item) {
+    this.setState({ selectedContentUrl: item.url });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ContentTypeDropdown
+          handleDropdown={this.handleDropdown}
+          selected={this.state.selectedContentType}
+        />
+        <ContentDetails selectedContent={this.state.selectedContentUrl} />
+        <ContentList
+          type={this.state.selectedContentType}
+          handleListSelection={this.handleListSelection}
+        />
       </div>
     );
   }
