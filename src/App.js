@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import ContentTypeDropdown from "./ContentTypeDropdown";
 import ContentList from "./ContentList";
@@ -25,17 +26,30 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <ContentTypeDropdown
-          handleDropdown={this.handleDropdown}
-          selected={this.state.selectedContentType}
-        />
-        <ContentDetails selectedContent={this.state.selectedContentUrl} />
-        <ContentList
-          type={this.state.selectedContentType}
-          handleListSelection={this.handleListSelection}
-        />
-      </div>
+      <Router>
+        <div className="App">
+          <Route
+            path="/"
+            render={() => (
+              <ContentTypeDropdown
+                handleDropdown={this.handleDropdown}
+                selected={this.state.selectedContentType}
+              />
+            )}
+          />
+
+          <ContentDetails selectedContent={this.state.selectedContentUrl} />
+          <Route
+            path="/"
+            render={() => (
+              <ContentList
+                type={this.state.selectedContentType}
+                handleListSelection={this.handleListSelection}
+              />
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 }

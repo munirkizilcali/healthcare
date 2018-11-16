@@ -1,4 +1,5 @@
 import React from "react";
+import Parser from "html-react-parser";
 
 import { baseUrl } from "./config";
 
@@ -37,7 +38,22 @@ class ContentDetails extends React.Component {
 
 	render() {
 		if (this.state.content !== "") {
-			return <div>{this.state.content.title}</div>;
+			return (
+				<div>
+					<h1>{this.state.content.title}</h1>
+					<div>{Parser(this.state.content.content)}</div>
+					<ul>
+						{Object.keys(this.state.content).map(key => {
+							return (
+								<li key={key}>
+									<b>{key}:</b>
+									{this.state.content[key]}
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			);
 		} else {
 			return <div>No content Selected</div>;
 		}
