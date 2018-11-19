@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
+import { Header, Icon } from "semantic-ui-react";
 
 import ContentTypeDropdown from "./ContentTypeDropdown";
 import ContentList from "./ContentList";
@@ -17,7 +18,9 @@ class App extends Component {
   }
 
   handleDropdown(e, component) {
-    this.setState({ selectedContentType: component.value });
+    // debugger;
+    // this.setState({ selectedContentType: component.value });
+    this.props.history.push(`/${component.value}`);
   }
 
   handleListSelection(item) {
@@ -26,10 +29,21 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <center>
+          <Header as="h1" icon>
+            <Icon
+              name="heartbeat"
+              color="red"
+              className="animated pulse infinite"
+            />
+            HealthCare.gov frontend challenge my M.K.
+          </Header>
+        </center>
+        <Switch>
           <Route
             path="/"
+            exact
             render={() => (
               <ContentTypeDropdown
                 handleDropdown={this.handleDropdown}
@@ -37,21 +51,26 @@ class App extends Component {
               />
             )}
           />
-
-          <ContentDetails selectedContent={this.state.selectedContentUrl} />
           <Route
-            path="/"
+            path="/:type"
+            exact
             render={() => (
-              <ContentList
-                type={this.state.selectedContentType}
-                handleListSelection={this.handleListSelection}
-              />
+              <React.Fragment>
+                <ContentTypeDropdown
+                  handleDropdown={this.handleDropdown}
+                  selected={this.state.selectedContentType}
+                />
+                <ContentList handleListSelection={this.handleListSelection} />
+              </React.Fragment>
             )}
           />
-        </div>
-      </Router>
+          <Route path="/:type/*">
+            <ContentDetails selectedContent={this.state.selectedContentUrl} />
+          </Route>
+        </Switch>
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

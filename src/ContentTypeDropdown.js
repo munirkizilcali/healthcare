@@ -1,48 +1,56 @@
 import React from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, Header } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 
 class ContentTypeDropdown extends React.Component {
 	render() {
 		const options = [
 			{
-				text: "Index",
+				text: "Index".toLowerCase(),
 				value: "index"
 			},
 			{
-				text: "Articles",
+				text: "Articles".toLowerCase(),
 				value: "articles"
 			},
 			{
-				text: "Blog",
+				text: "Blog".toLowerCase(),
 				value: "blog"
 			},
 			{
-				text: "Questions",
+				text: "Questions".toLowerCase(),
 				value: "questions"
 			},
 			{
-				text: "Glossary",
+				text: "Glossary".toLowerCase(),
 				value: "glossary"
 			},
 			{
-				text: "States",
+				text: "States".toLowerCase(),
 				value: "states"
 			},
 			{
-				text: "Topics",
+				text: "Topics".toLowerCase(),
 				value: "topics"
 			}
 		];
 		return (
-			<Dropdown
-				placeholder="Please select a content type"
-				onChange={this.props.handleDropdown}
-				selection
-				options={options}
-				value={this.props.selected}
-			/>
+			<div>
+				<center>
+					<Header as="h3">
+						List me objects from{" "}
+						<Dropdown
+							inline
+							placeholder="category"
+							onChange={this.props.handleDropdown}
+							options={options}
+							value={this.props.match.params.type}
+						/>
+					</Header>
+				</center>
+			</div>
 		);
 	}
 }
 
-export default ContentTypeDropdown;
+export default withRouter(ContentTypeDropdown);

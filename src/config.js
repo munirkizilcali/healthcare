@@ -1,1 +1,1 @@
-export const baseUrl = "https://www.healthcare.gov";
+export const baseUrl = `https://www.healthcare.gov`;
