@@ -6,7 +6,7 @@ import ContentTypeDropdown from "./ContentTypeDropdown";
 import ContentList from "./ContentList";
 import ContentDetails from "./ContentDetails";
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
