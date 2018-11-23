@@ -17,6 +17,10 @@ export class App extends Component {
     this.handleListSelection = this.handleListSelection.bind(this);
   }
 
+  componentDidMount() {
+    document.title = "Healthcare Frontend Code Challenge";
+  }
+
   handleDropdown(e, component) {
     // debugger;
     // this.setState({ selectedContentType: component.value });
