@@ -47,39 +47,41 @@ export class ContentList extends React.Component {
 		if (Array.isArray(this.state.list) && this.state.loading === false) {
 			return (
 				<Segment>
-					<List divided animated verticalAlign="middle">
-						{this.state.list.map((item, index) => {
-							return (
-								<List.Item key={index}>
-									<List.Content>
-										<Link
-											to={`/${
-												this.props.match.params.type
-											}${item.url}`}
-										>
-											<List.Header as="a">
-												<Icon name="caret square right" />
-												{item.title}
-											</List.Header>
-										</Link>
-										<List.Description>
-											{item.url}
-										</List.Description>
-										{item.bite}
-									</List.Content>
-								</List.Item>
-							);
-						})}
-					</List>
+					{this.state.list.length !== 0 ? (
+						<List divided animated verticalAlign="middle">
+							{this.state.list.map((item, index) => {
+								return (
+									<List.Item key={index}>
+										<List.Content>
+											<Link
+												to={`/${
+													this.props.match.params.type
+												}${item.url}`}
+											>
+												<List.Header as="a">
+													<Icon name="caret square right" />
+													{item.title}
+												</List.Header>
+											</Link>
+											<List.Description>
+												{item.url}
+											</List.Description>
+											{item.bite}
+										</List.Content>
+									</List.Item>
+								);
+							})}
+						</List>
+					) : (
+						"No result for this category."
+					)}
 				</Segment>
 			);
 		} else if (this.state.loading === true) {
 			return (
-				<Segment>
-					<Dimmer active inverted>
-						<Loader inverted>Loading</Loader>
-					</Dimmer>
-				</Segment>
+				<Dimmer active inverted>
+					<Loader inverted>Loading</Loader>
+				</Dimmer>
 			);
 		} else {
 			return <Segment>No Content Type Selected</Segment>;
