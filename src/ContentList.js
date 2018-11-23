@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 
 import { baseUrl } from "./config";
 
-class ContentList extends React.Component {
+export class ContentList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {

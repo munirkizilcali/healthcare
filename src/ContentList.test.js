@@ -6,7 +6,7 @@ import { MemoryRouter } from "react-router-dom";
 it("renders without crashing", () => {
 	const div = document.createElement("div");
 	ReactDOM.render(
-		<MemoryRouter>
+		<MemoryRouter initialEntries={["/articles"]} initialIndex={0}>
 			<App />
 		</MemoryRouter>,
 		div
