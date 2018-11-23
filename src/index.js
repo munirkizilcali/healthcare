@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.js";
 
 ReactDOM.render(
-	<Router>
+	<Router basename={"/healthcare"}>
 		<App />
 	</Router>,
 	document.getElementById("root")
